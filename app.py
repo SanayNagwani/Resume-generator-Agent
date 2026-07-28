@@ -10,6 +10,7 @@ import pytesseract as pyt
 import numpy as np
 from langchain.messages import SystemMessage, HumanMessage
 from langchain.agents import create_agent
+from PIL import Image
 
 
 #===================front end==============
@@ -17,11 +18,11 @@ st.title("AI resume maker & job apply agent")
 st.image("https://towardsdatascience.com/wp-content/uploads/2025/01/1s2dtl0h7aipYWHfKVC7cUA.jpg",  width = 300)
 
 GOOGLE_API_KEY = st.sidebar.text_input("GOOGLE API KEY", type= 'password')
-GROQ_API_KEY = st.sidebar.text_input("GORQ API KEY", type = 'password')
+GROQ_API_KEY = st.sidebar.text_input("GROQ API KEY", type = 'password')
 TAVILY_API_KEY = st.sidebar.text_input("TAVILY API KEY", type = 'password')
 
 if not (GOOGLE_API_KEY) and not (GROQ_API_KEY)  and not (TAVILY_API_KEY):
-  st.warning("Pass API key")
+  st.sidebar.warning("Pass API key")
   st.stop()
 else:
   st.success("API KEYS LOADED ")
@@ -96,6 +97,28 @@ and must show user input details
 System instructions: Only Give HTML code as output"""
 
 final_prompt = prompt + prompt_reader()
+
+#================== IMAGE UPLOADER ======================
+#================== UPLOAD IMAGE =======================  
+
+File = st.sidebar.file_uploader(
+  "choose an image file",
+  type=["jpeg","jpg","png","webpg"]
+)
+
+
+if File is not None:
+  try:
+    image = Image.open(File)
+
+
+    st.sidebar.image(image, caption= "uploaded image",
+                     use_container_width=True)
+
+
+if image.mode in ("RGBA", "P"):
+  image = image.convert("RGB")
+
 
 #change this when required new resume by user, pass details
 
