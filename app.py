@@ -144,16 +144,16 @@ user_query = f"""User details: given below:
     
 final_query = final_prompt + user_query
 
-  OPTIONS = ["DELHI","NOIDA","GURGAON/GURUGRAM",
+OPTIONS = ["DELHI","NOIDA","GURGAON/GURUGRAM",
             'KANPUR','LUCKNOW','BANGLORE','PUNE']
              
-  LOCATION = st.sidebar.multiselect('SELECT LOCATION: ',
+LOCATION = st.sidebar.multiselect('SELECT LOCATION: ',
                                       options = OPTIONS )
   
-  JOB_PROFILE = ["PYTHON DEVELOPER",'GEN AI',
+JOB_PROFILE = ["PYTHON DEVELOPER",'GEN AI',
                   'FULL-STACK DEVELOPER','DATA ANALYST']
   
-  PROFILE = st.sidebar.multiselect("SELECT JOB ROLE",
+PROFILE = st.sidebar.multiselect("SELECT JOB ROLE",
                   options = JOB_PROFILE)
 
 
@@ -166,15 +166,23 @@ apply link and OUTPUT must be In HTML no markdowns""
 
 
 if st.button("Generate Resume"):
-with st.spinner("Agent creating Resume..."):
-responce = agent.invoke({'messages':[{'role':'user',"content":final_query}]})
-code = responce['messages'][-1].content[-1]['text']
+  with st.spinner("Agent creating Resume..."):
+   responce = agent.invoke({'messages':[{'role':'user',"content":final_query}]})
+   code = responce['messages'][-1].content[-1]['text']
 
 
-
-
-
+  if  FILE is not None:
+     with open (save_path, "rb") as img_file:
+     b64_image = base64.b64encode(img_file.read())>decode()
+     data_url = f"data:image/jpeg;base64,{b64_image}"
+     code = code.replace("PROFILE_IMAGE_PLACEHOLDER",data_url)
 
 
     st.html(code, width="stretch", unsafe_allow_javascript=True)
 
+
+#=========================== Apply live jobs =============================
+    st.divider()
+    responce = agent.invoke({'messages':[{'role':'user','content':job_prompt}]})
+    code = responce['messages'][-1].content[-1]['text']
+    st.html(job_code, width="stretch", unsafe_allow_javascript=True)
