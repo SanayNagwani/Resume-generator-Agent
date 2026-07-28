@@ -134,13 +134,13 @@ if File is not None:
 #change this when required new resume by user, pass details
 
 user_info = st.text_input("give your information: ")
-user_photo = st.sidebar.file_uploader("Upload pic", type = 'image/jpeg')
 
 
-user_query = f"""give resume for python developer.
-    User details : {user_info}
-    use user profile image from given {user_photo}"""
+user_query = f"""User details: given below:
+    resume info : {user_info}
+    default if not given : python developer resume"""
 
+    
 final_query = final_prompt + user_query
 
 if st.button("Generate Resume"):
