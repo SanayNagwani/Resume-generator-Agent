@@ -144,31 +144,37 @@ user_query = f"""User details: given below:
     
 final_query = final_prompt + user_query
 
-OPTIONS = ["DELHI","NOIDA","GURGAON/GURUGRAM",
-          'KANPUR','LUCKNOW','BANGLORE','PUNE']
-           
-LOCATION = st.sidebar.multiselect('SELECT LOCATION: ',
-                                    options = OPTIONS )
+  OPTIONS = ["DELHI","NOIDA","GURGAON/GURUGRAM",
+            'KANPUR','LUCKNOW','BANGLORE','PUNE']
+             
+  LOCATION = st.sidebar.multiselect('SELECT LOCATION: ',
+                                      options = OPTIONS )
+  
+  JOB_PROFILE = ["PYTHON DEVELOPER",'GEN AI',
+                  'FULL-STACK DEVELOPER','DATA ANALYST']
+  
+  PROFILE = st.sidebar.multiselect("SELECT JOB ROLE",
+                  options = JOB_PROFILE)
 
-JOB_PROFILE = ["PYTHON DEVELOPER",'GEN AI',
-                'FULL-STACK DEVELOPER','DATA ANALYST']
 
-PROFILE = st.sidebar.multiselect("SELECT JOB ROLE",
-                options = JOB_PROFILE)
-
-
-  job_prompt = f"""Based on {PROFILE} jobs in {LOCATION}, I 
-  want latest job news in using tavily, 
-  try top 10 search or whatever available
-  and give result like naukri theme design with
-  job name, job desc, salary,
-  apply link and OUTPUT must be In HTML no markdowns""
+job_prompt = f"""Based on {PROFILE} jobs in {LOCATION}, I 
+want latest job news in using tavily, 
+try top 10 search or whatever available
+and give result like naukri theme design with
+job name, job desc, salary,
+apply link and OUTPUT must be In HTML no markdowns""
 
 
 if st.button("Generate Resume"):
-  with st.spinner("Agent creating Resume..."):
-    responce = agent.invoke({'messages':[{'role':'user',"content":final_query}]})
-    code = responce['messages'][-1].content[-1]['text']
+with st.spinner("Agent creating Resume..."):
+responce = agent.invoke({'messages':[{'role':'user',"content":final_query}]})
+code = responce['messages'][-1].content[-1]['text']
+
+
+
+
+
+
 
     st.html(code, width="stretch", unsafe_allow_javascript=True)
 
