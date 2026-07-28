@@ -116,7 +116,7 @@ if File is not None:
                      use_container_width=True)
 
 
-      if image.mode in ("RGBA", "P"):
+    if image.mode in ("RGBA", "P"):
         image = image.convert("RGB")
 
 
