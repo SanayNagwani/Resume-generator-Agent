@@ -157,12 +157,12 @@ PROFILE = st.sidebar.multiselect("SELECT JOB ROLE",
                 options = JOB_PROFILE)
 
 
-job_prompt = f"""Based on {PROFILE} jobs in {LOCATION}, I 
-want latest job news in using tavily, 
-try top 10 search or whatever available
-and give result like naukri theme design with
-job name, job desc, salary,
-apply link and OUTPUT must be In HTML no markdowns""
+  job_prompt = f"""Based on {PROFILE} jobs in {LOCATION}, I 
+  want latest job news in using tavily, 
+  try top 10 search or whatever available
+  and give result like naukri theme design with
+  job name, job desc, salary,
+  apply link and OUTPUT must be In HTML no markdowns""
 
 
 if st.button("Generate Resume"):
