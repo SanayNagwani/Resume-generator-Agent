@@ -20,8 +20,11 @@ GOOGLE_API_KEY = st.sidebar.text_input("GOOGLE API KEY", type= 'password')
 GROQ_API_KEY = st.sidebar.text_input("GORQ API KEY", type = 'password')
 TAVILY_API_KEY = st.sidebar.text_input("TAVILY API KEY", type = 'password')
 
-if not GOOGLE_API_KEY:
-  st.warning("provide google API key")
+if not (GOOGLE_API_KEY) and not (GROQ_API_KEY)  and not (TAVILY_API_KEY):
+  st.warning("Pass API key")
+  st.stop()
+else:
+  st.success("API KEYS LOADED ")
 
 
 #=========================== MODEL AND AGENT CODE ======================
