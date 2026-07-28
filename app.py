@@ -112,7 +112,8 @@ if File is not None:
     image = Image.open(File)
 
 
-    st.sidebar.image(image, caption= "uploaded image",
+    st.sidebar.image(image, 
+                     caption= "uploaded image",
                      use_container_width=True)
 
 
@@ -120,10 +121,10 @@ if File is not None:
         image = image.convert("RGB")
 
 
-      base_name = os.path.splitext(File.name)[0]
+    base_name = os.path.splitext(File.name)[0]
       save_path = f"{base_name}.jpg"
       
-      image.save(save_path, "JPEG")
+    image.save(save_path, "JPEG")
       st.sidebar.success(f" IMAGE succesfully saved as  `{save_path}`!")
 
   except Exception as e:
