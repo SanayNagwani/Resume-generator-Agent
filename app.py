@@ -169,7 +169,7 @@ if st.button("Generate Resume"):
   with st.spinner("Agent creating Resume..."):
    
     responce = agent.invoke({'messages':[{'role':'user',"content":final_query}]})
-   code = responce['messages'][-1].content[-1]['text']
+    code = responce['messages'][-1].content[-1]['text']
 
 
      if  FILE is not None:
