@@ -13,7 +13,8 @@ from langchain.agents import create_agent
 
 
 #===================front end==============
-st.title("AI RESUME GENERATOR")
+st.title("AI resume maker & job apply agent")
+st.image("https://towardsdatascience.com/wp-content/uploads/2025/01/1s2dtl0h7aipYWHfKVC7cUA.jpg",  width = 300)
 
 GOOGLE_API_KEY = st.sidebar.text_input("GOOGLE API KEY", type= 'password')
 GROQ_API_KEY = st.sidebar.text_input("GORQ API KEY", type = 'password')
